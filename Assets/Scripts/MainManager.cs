@@ -73,6 +73,7 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
+        DataManager.Instance.score = m_Points;
         DataManager.Instance.SaveGameData();
         m_GameOver = true;
         GameOverText.SetActive(true);

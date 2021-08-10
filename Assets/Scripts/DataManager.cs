@@ -7,6 +7,9 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     public string playerName;
+    public int score;
+    public string highestScorePlayerName;
+    public int? highestScore;
     
     private string savegamePath;
     
@@ -26,13 +29,13 @@ public class DataManager : MonoBehaviour
     [System.Serializable]
     class GameData
     {
-        public string playerName;
+        public string highestScorePlayerName;
+        public int highestScore;
     }
 
     public void SaveGameData()
     {
         GameData data = new GameData();
-        data.playerName = playerName;
 
         string json = JsonUtility.ToJson(data);
 
@@ -45,7 +48,8 @@ public class DataManager : MonoBehaviour
         {
             string json = File.ReadAllText(savegamePath);
             GameData data = JsonUtility.FromJson<GameData>(json);
-            playerName = data.playerName;
+            highestScorePlayerName = data.highestScorePlayerName;
+            highestScore = data.highestScore;
         }
     }
 }
