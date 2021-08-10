@@ -15,8 +15,8 @@ public class MainSceneUIHandler : MonoBehaviour
     void Start()
     {
       string highestScorePlayerName = DataManager.Instance.highestScorePlayerName;
-      int? highestScore = DataManager.Instance.highestScore;
-      if (highestScorePlayerName != null && highestScore != null)
+      int highestScore = DataManager.Instance.highestScore;
+      if (highestScorePlayerName != null && highestScore != 0)
       {
         score.text = $"Best Score: {highestScorePlayerName}: {highestScore}";
         score.gameObject.SetActive(true);

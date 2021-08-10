@@ -9,7 +9,7 @@ public class DataManager : MonoBehaviour
     public string playerName;
     public int score;
     public string highestScorePlayerName;
-    public int? highestScore;
+    public int highestScore = 0;
     
     private string savegamePath;
     
@@ -35,11 +35,18 @@ public class DataManager : MonoBehaviour
 
     public void SaveGameData()
     {
-        GameData data = new GameData();
+        if (score > highestScore)
+        {
+          GameData data = new GameData();
+          data.highestScore = score;
+          data.highestScorePlayerName = playerName;
 
-        string json = JsonUtility.ToJson(data);
+          string json = JsonUtility.ToJson(data);
 
-        File.WriteAllText(savegamePath, json);
+          File.WriteAllText(savegamePath, json);
+          highestScore = score;
+          highestScorePlayerName = playerName;
+        }
     }
 
     public void LoadGameData()
